@@ -1,0 +1,6 @@
+def LABL(d):
+    labels=dict()
+    for i in d:
+        if ":" in i:
+            t=i.split(":")
+            labels[t[0]]=
