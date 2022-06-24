@@ -1,0 +1,11 @@
+def LABL(d):
+    labels=dict()
+    variables=dict()
+    for lineno in range(len(d)):
+        if ":" in d[lineno]:
+            t=d[lineno].split(":")
+            labels[t[0]]=f'{{lineno}-{len(labels)}:08b}'
+        elif "var" in d[lineno]:
+            t=d[lineno].lstrip("var ")
+            variables[t]=f'{{lineno}-{len(labels)}:08b}'
+    return labels
