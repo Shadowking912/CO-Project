@@ -11,13 +11,9 @@ def convert(immediateValue):
         j=j+1
     immediateValue=immediateValue[::-1]
     return immediateValue
-
-
 instructions=[["add","R0","R1","R2"],["hlt"],["jlt","goto"],["mov","R2","$10"]]
-# def findType():
 instructionType={"add":'A',"sub":'A',"mul":'A',"xor":'A',"or":'A',"and":'A','movim':
     'B',"ls":"B","movr":"C","div":"C","not":"C","cmp":"C","ld":"D","st":"D","jmp":"E","jlt":"E","jgt":"E","je":"E","hlt":"F"}
-    # return instructionType
 unusedBits={'A':"00",'C':"00000","E":"000","F":"00000000000"}
 
 reg={"R0":"000", "R1":"001", "R2":"010", "R3":"011", "R4":"100","R5":"101", "R6":"110", "FLAGS":"111"}
@@ -35,57 +31,22 @@ for i in instructions:
             i[0]+="r"
     encode=""
     encode+=opcode[i[0]]
-    # if instructionType[i[0]] in unusedBits:
-    #     encode+=unusedBits[instructionType[i[0]]]
     if instructionType[i[0]]=="A":
         encode+=unusedBits[instructionType[i[0]]]+reg[i[1]]+reg[i[2]]+reg[i[3]]
     # Doubt ask about if immediate value is negative, how is it stored?
     elif instructionType[i[0]]=="B":
         immediateValue=i[2][1:]
         immediateValue=convert(immediateValue)
-        # immediateValue=int(immediateValue)
-        # immediateValue=bin(immediateValue)
-        # immediateValue=str(immediateValue)
-        # immediateValue=immediateValue[2:]
-        # immediateValue=immediateValue[::-1]
-        # bits=8-len(immediateValue)
-        # j=1
-        # while j<=bits:
-        #     immediateValue+='0'
-        #     j=j+1
-        # immediateValue=immediateValue[::-1]
         encode+=reg[i[1]]+immediateValue
     elif instructionType[i[0]]=="C":
         encode+=unusedBits[instructionType[i[0]]]+reg[i[1]]+reg[i[2]]    
     elif instructionType[i[0]]=="D":
         memAddress=variables[i[2]]
         memAddress=convert(memAddress)
-        # memAddress=int(memAddress)
-        # memAddress=bin(memAddress)
-        # memAddress=str(memAddress)
-        # memAddress=memAddress[2:]
-        # memAddress=memAddress[::-1]
-        # bits=8-len(memAddress)
-        # j=1
-        # while j<=bits:
-        #     memAddress+='0'
-        #     j=j+1
-        # memAddress=memAddress[::-1]
         encode+=reg[i[1]]+memAddress
     elif instructionType[i[0]]=="E":
         memAddress=labels[i[1]]
         memAddress=convert(memAddress)
-        # memAddress=int(memAddress)
-        # memAddress=bin(memAddress)
-        # memAddress=str(memAddress)
-        # memAddress=memAddress[2:]
-        # memAddress=memAddress[::-1]
-        # bits=8-len(memAddress)
-        # j=1
-        # while j<=bits:
-        #     memAddress+='0'
-        #     j=j+1
-        # memAddress=memAddress[::-1]
         encode+=unusedBits[instructionType[i[0]]]+memAddress
     elif instructionType[i[0]]=="F":
         encode+=unusedBits[instructionType[i[0]]]
