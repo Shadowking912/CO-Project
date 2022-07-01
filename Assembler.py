@@ -23,8 +23,7 @@ def takeInput():
     for i in d:
         if (i.split()!=[]):
             instructions.append(i.strip().split())
-        else:
-            break
+  
     i=0
     while i<len(instructions):
         if (instructions[i][0]=="var"):
