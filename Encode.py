@@ -1,3 +1,4 @@
+# this code converts int to binary
 def binary(immediateValue):
     temp=int(immediateValue)
     temp=bin(temp)
