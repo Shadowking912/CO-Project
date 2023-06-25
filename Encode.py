@@ -1,10 +1,10 @@
 # this code converts int to binary
 def binary(immediateValue):
-    temp=int(immediateValue)
-    temp=bin(temp)
-    temp=str(temp)
-    temp=temp[2:]
-    return temp
+    temp1=int(immediateValue)
+    temp1=bin(temp1)
+    temp1=str(temp1)
+    temp1=temp1[2:]
+    return temp1
 def binary_after(immediateValue,bits):
     exponent="."+immediateValue
     lenExponent=len(immediateValue)
